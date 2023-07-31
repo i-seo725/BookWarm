@@ -48,5 +48,27 @@ class LibraryCollectionViewController: UICollectionViewController {
         return cell
     }
     
+    @IBAction func searchBarButtonTapped(_ sender: UIBarButtonItem) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else { return }
+        
+        //제목 바 담기
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
+        
+        
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        guard let vc = sb.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+        //푸시는 네비게이션 컨트롤러 안됨
+//        let nav = UINavigationController(rootViewController: vc)
+        
+        navigationController?.pushViewController(vc, animated: true)
+        
+        vc.getTitle = list.movie[indexPath.row].title
+    }
     
 }

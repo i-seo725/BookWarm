@@ -32,6 +32,9 @@
                             <constraint firstItem="fmt-u6-zBp" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="IFm-3x-65F"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchContentLabel" destination="fmt-u6-zBp" id="SLC-6z-Xtk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -59,6 +62,9 @@
                             <constraint firstItem="1GO-bI-XSx" firstAttribute="centerX" secondItem="M3P-dv-vq4" secondAttribute="centerX" id="TDQ-Yh-P8G"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="detailLabel" destination="1GO-bI-XSx" id="zz6-EP-VAE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7fb-pf-G9B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -95,7 +101,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="Wkv-NB-jej">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="bIe-VP-UjN"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="bIe-VP-UjN">
+                            <connections>
+                                <action selector="searchBarButtonTapped:" destination="tsT-UZ-MYT" id="lKf-3j-0ua"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="19k-Sl-KUD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
