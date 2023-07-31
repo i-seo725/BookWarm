@@ -94,7 +94,9 @@
                             <outlet property="delegate" destination="tsT-UZ-MYT" id="KOE-dC-d7O"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="Wkv-NB-jej"/>
+                    <navigationItem key="navigationItem" id="Wkv-NB-jej">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="bIe-VP-UjN"/>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="19k-Sl-KUD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -9,7 +9,6 @@ import UIKit
 
 class LibraryCollectionViewController: UICollectionViewController {
 
-    let list = MovieInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +16,8 @@ class LibraryCollectionViewController: UICollectionViewController {
         collectionView.register(nib, forCellWithReuseIdentifier: "LibraryListCollectionViewCell")
         setLayout()
         title = "은서의 책장"
+        navigationItem.rightBarButtonItem?.image = UIImage(systemName: "magnifyingglass")
+        navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
     func setLayout() {
@@ -37,23 +38,12 @@ class LibraryCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return list.movie.count
     }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LibraryListCollectionViewCell", for: indexPath) as? LibraryListCollectionViewCell else { return UICollectionViewCell() }
         
         let row = list.movie[indexPath.row]
-        let color = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemOrange, UIColor.systemGreen, UIColor.systemYellow, UIColor.systemCyan, UIColor.systemGray, UIColor.systemMint, UIColor.systemPink, UIColor.systemBrown, UIColor.systemIndigo, UIColor.systemPurple]
-        let randomColor = color.randomElement()!
-        
-        cell.titleLabel.text = row.title
-        cell.titleLabel.textColor = .white
-        cell.titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        
-        cell.rateLabel.text = "\(row.rate)"
-        cell.rateLabel.textColor = .white
-        cell.posterImageView.image = UIImage(named: row.title)
-        
-        cell.layer.cornerRadius = 15
-        cell.backgroundColor = randomColor
+        cell.configCell(row: row)
         
         return cell
     }

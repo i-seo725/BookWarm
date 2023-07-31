@@ -19,3 +19,4 @@ struct MovieInfo {
 
     
 }
+let list = MovieInfo()
