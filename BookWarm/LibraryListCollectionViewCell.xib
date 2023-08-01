@@ -35,20 +35,33 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jn-7S-B1K">
+                        <rect key="frame" x="97" y="8" width="34" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="0jn-7S-B1K" secondAttribute="height" multiplier="1:1" id="qOz-O4-oTD"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="6UW-Dr-fXw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="2Jz-P8-ysW"/>
+                <constraint firstItem="SQd-h4-koi" firstAttribute="top" secondItem="0jn-7S-B1K" secondAttribute="bottom" constant="8" id="B5b-qc-q9g"/>
+                <constraint firstItem="0jn-7S-B1K" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Em7-ov-uej"/>
                 <constraint firstItem="PvR-5e-11I" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="Q3A-nI-VL4"/>
+                <constraint firstItem="0jn-7S-B1K" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PvR-5e-11I" secondAttribute="trailing" id="QYa-ZB-Mtf"/>
                 <constraint firstAttribute="trailing" secondItem="SQd-h4-koi" secondAttribute="trailing" constant="10" id="ZYi-Q7-6iR"/>
                 <constraint firstAttribute="bottom" secondItem="SQd-h4-koi" secondAttribute="bottom" id="c16-KQ-abh"/>
                 <constraint firstItem="PvR-5e-11I" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="gzE-t8-9u0"/>
                 <constraint firstAttribute="bottom" secondItem="6UW-Dr-fXw" secondAttribute="bottom" constant="20" id="qV7-I1-R8E"/>
+                <constraint firstAttribute="trailing" secondItem="0jn-7S-B1K" secondAttribute="trailing" constant="16" id="vVE-rf-iPf"/>
                 <constraint firstItem="SQd-h4-koi" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="50" id="xHw-ll-Nle"/>
             </constraints>
             <size key="customSize" width="147" height="147"/>
             <connections>
+                <outlet property="likeButton" destination="0jn-7S-B1K" id="zFv-u9-05R"/>
                 <outlet property="posterImageView" destination="SQd-h4-koi" id="vZQ-nn-b7w"/>
                 <outlet property="rateLabel" destination="6UW-Dr-fXw" id="5w0-Ei-sxi"/>
                 <outlet property="titleLabel" destination="PvR-5e-11I" id="EqL-ko-4gA"/>

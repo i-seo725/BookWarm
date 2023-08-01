@@ -45,8 +45,21 @@ class LibraryCollectionViewController: UICollectionViewController {
         let row = list.movie[indexPath.row]
         cell.configCell(row: row)
         
+        //좋아요 버튼 누르기
+        cell.likeButton.tag = indexPath.row
+        cell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        cell.likeButton.setTitle("", for: .normal)
+        cell.likeButton.tintColor = .white
+        
         return cell
     }
+    
+    
+    @objc func likeButtonTapped(_ sender: UIButton) {
+        list.movie[sender.tag].like.toggle()
+        collectionView.reloadData()
+    }
+    
     
     @IBAction func searchBarButtonTapped(_ sender: UIBarButtonItem) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
@@ -68,7 +81,13 @@ class LibraryCollectionViewController: UICollectionViewController {
         
         navigationController?.pushViewController(vc, animated: true)
         
-        vc.getTitle = list.movie[indexPath.row].title
+        let row = list.movie[indexPath.row]
+        vc.getTitle = row.title
+        vc.getPosterImage = row.title
+        vc.getLikeImage = row.like
+        vc.getTitleScore = "\(row.title) | 평점 \(row.rate) | \(row.runtime)분"
+        vc.getContent = row.overview
+        
     }
     
 }

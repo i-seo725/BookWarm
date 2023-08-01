@@ -12,6 +12,7 @@ class LibraryListCollectionViewCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var rateLabel: UILabel!
     @IBOutlet var posterImageView: UIImageView!
+    @IBOutlet var likeButton: UIButton!
     
     func configCell(row: Movie) {
         let color = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemOrange, UIColor.systemGreen, UIColor.systemYellow, UIColor.systemCyan, UIColor.systemGray, UIColor.systemMint, UIColor.systemPink, UIColor.systemBrown, UIColor.systemIndigo, UIColor.systemPurple]
@@ -27,5 +28,8 @@ class LibraryListCollectionViewCell: UICollectionViewCell {
         
         layer.cornerRadius = 15
         backgroundColor = randomColor
+        
+        let image = row.like == true ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        likeButton.setImage(image, for: .normal)
     }
 }
