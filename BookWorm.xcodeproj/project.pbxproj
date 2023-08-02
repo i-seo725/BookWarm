@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F42313742A7A87B20002F967 /* LookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42313732A7A87B20002F967 /* LookingViewController.swift */; };
 		F467DFAC2A77E439009D7266 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467DFAB2A77E439009D7266 /* AppDelegate.swift */; };
 		F467DFAE2A77E439009D7266 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467DFAD2A77E439009D7266 /* SceneDelegate.swift */; };
 		F467DFB02A77E439009D7266 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F467DFAF2A77E439009D7266 /* SearchViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F42313732A7A87B20002F967 /* LookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookingViewController.swift; sourceTree = "<group>"; };
 		F467DFA82A77E439009D7266 /* BookWarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookWarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F467DFAB2A77E439009D7266 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F467DFAD2A77E439009D7266 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				F467DFAD2A77E439009D7266 /* SceneDelegate.swift */,
 				F467DFAF2A77E439009D7266 /* SearchViewController.swift */,
 				F467DFB12A77E439009D7266 /* Main.storyboard */,
+				F42313732A7A87B20002F967 /* LookingViewController.swift */,
 				F467DFCD2A77E84D009D7266 /* LibraryListCollectionViewCell.swift */,
 				F467DFCE2A77E84D009D7266 /* LibraryListCollectionViewCell.xib */,
 				F467DFC32A77E64F009D7266 /* DetailViewController.swift */,
@@ -120,7 +123,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F467DFA32A77E439009D7266 /* Build configuration list for PBXProject "BookWarm" */;
+			buildConfigurationList = F467DFA32A77E439009D7266 /* Build configuration list for PBXProject "BookWorm" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -161,6 +164,7 @@
 				F467DFC82A77E759009D7266 /* MovieStruct.swift in Sources */,
 				F467DFC02A77E4C3009D7266 /* LibraryCollectionViewController.swift in Sources */,
 				F467DFB02A77E439009D7266 /* SearchViewController.swift in Sources */,
+				F42313742A7A87B20002F967 /* LookingViewController.swift in Sources */,
 				F467DFC42A77E64F009D7266 /* DetailViewController.swift in Sources */,
 				F467DFAC2A77E439009D7266 /* AppDelegate.swift in Sources */,
 				F467DFCF2A77E84D009D7266 /* LibraryListCollectionViewCell.swift in Sources */,
@@ -371,7 +375,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F467DFA32A77E439009D7266 /* Build configuration list for PBXProject "BookWarm" */ = {
+		F467DFA32A77E439009D7266 /* Build configuration list for PBXProject "BookWorm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F467DFBA2A77E439009D7266 /* Debug */,

@@ -14,4 +14,7 @@ struct Movie {
     let overview: String
     let rate: Double
     var like: Bool
+    let colorR: CGFloat = CGFloat.random(in: 0...1)
+    let colorG: CGFloat = CGFloat.random(in: 0...1)
+    let colorB: CGFloat = CGFloat.random(in: 0...1)
 }
