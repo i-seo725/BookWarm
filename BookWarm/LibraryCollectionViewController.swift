@@ -7,8 +7,10 @@
 
 import UIKit
 
-class LibraryCollectionViewController: UICollectionViewController {
-
+class LibraryCollectionViewController: UICollectionViewController, UISearchBarDelegate {
+    let searchBar = UISearchBar()
+    let movieTitleList = ["암살, 명량, 광해, 부산행, 아바타, 어벤져스엔드게임, 해운대, 7번방의선물, 겨울왕국2"]
+    var searchList: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,13 @@ class LibraryCollectionViewController: UICollectionViewController {
         title = "은서의 책장"
         navigationItem.rightBarButtonItem?.image = UIImage(systemName: "magnifyingglass")
         navigationItem.rightBarButtonItem?.tintColor = .black
+        
+        searchBar.delegate = self
+        searchBar.placeholder = "검색어를 입력해주세요"
+        searchBar.showsCancelButton = true
+        
+        navigationItem.titleView = searchBar
+        searchList = []
     }
     
     func setLayout() {
@@ -36,11 +45,17 @@ class LibraryCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.movie.count
+        return searchList.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LibraryListCollectionViewCell", for: indexPath) as? LibraryListCollectionViewCell else { return UICollectionViewCell() }
+        
+//        for i in searchList {
+//            if i == list.movie
+//        }
+        
+        
         
         let row = list.movie[indexPath.row]
         cell.configCell(row: row)
@@ -91,5 +106,37 @@ class LibraryCollectionViewController: UICollectionViewController {
 //        vc.getContent = row.overview
         
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchList.removeAll()
+        for item in movieTitleList {
+            if item.contains(searchBar.text!) {
+                searchList.append(item)
+                print(searchList)
+            }
+        }
+        collectionView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        //서치바 텍스트, 서치리스트 결과 지우기
+        searchList.removeAll()
+        searchBar.text = ""
+        collectionView.reloadData()
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchList.removeAll()
+        for item in movieTitleList {
+            if item.contains(searchBar.text!) {
+                searchList.append(item)
+                print(searchList)
+            }
+        }
+        collectionView.reloadData()
+
+    }
+    
     
 }
