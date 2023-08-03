@@ -71,6 +71,7 @@ class LibraryCollectionViewController: UICollectionViewController {
         present(nav, animated: true)
         
         
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -82,11 +83,12 @@ class LibraryCollectionViewController: UICollectionViewController {
         navigationController?.pushViewController(vc, animated: true)
         
         let row = list.movie[indexPath.row]
-        vc.getTitle = row.title
-        vc.getPosterImage = row.title
-        vc.getLikeImage = row.like
-        vc.getTitleScore = "\(row.title) | 평점 \(row.rate) | \(row.runtime)분"
-        vc.getContent = row.overview
+        vc.getData(row: row)
+//        vc.getTitle = row.title
+//        vc.getPosterImage = row.title
+//        vc.getLikeImage = row.like
+//        vc.getTitleScore = "\(row.title) | 평점 \(row.rate) | \(row.runtime)분"
+//        vc.getContent = row.overview
         
     }
     

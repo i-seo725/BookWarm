@@ -110,7 +110,7 @@
             </objects>
             <point key="canvasLocation" x="2919.8473282442746" y="-2.1126760563380285"/>
         </scene>
-        <!--Library Collection View Controller-->
+        <!--Tab bar 2-->
         <scene sceneID="FnQ-sM-hhK">
             <objects>
                 <collectionViewController storyboardIdentifier="LibraryCollectionViewController" id="tsT-UZ-MYT" customClass="LibraryCollectionViewController" customModule="BookWarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -140,6 +140,7 @@
                             <outlet property="delegate" destination="tsT-UZ-MYT" id="KOE-dC-d7O"/>
                         </connections>
                     </collectionView>
+                    <tabBarItem key="tabBarItem" title="Tab bar 2" image="star.fill" catalog="system" id="PI5-Ej-MhP"/>
                     <navigationItem key="navigationItem" id="Wkv-NB-jej">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="bIe-VP-UjN">
                             <connections>
@@ -152,7 +153,7 @@
             </objects>
             <point key="canvasLocation" x="1518" y="-2"/>
         </scene>
-        <!--Looking View Controller-->
+        <!--Tab bar 1-->
         <scene sceneID="18K-kd-yVK">
             <objects>
                 <viewController storyboardIdentifier="LookingViewController" id="v17-Bs-mNt" customClass="LookingViewController" customModule="BookWarm" customModuleProvider="target" sceneMemberID="viewController">
@@ -271,7 +272,7 @@
                             <constraint firstItem="vzV-3I-tq8" firstAttribute="trailing" secondItem="yaj-9g-2bT" secondAttribute="trailing" id="oBj-q2-Vto"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="UrT-Bd-rKW"/>
+                    <tabBarItem key="tabBarItem" title="Tab bar 1" image="star.fill" catalog="system" id="UrT-Bd-rKW"/>
                     <navigationItem key="navigationItem" id="TnI-if-MA2"/>
                     <connections>
                         <outlet property="collectionViewTitle" destination="LAI-DK-lKy" id="QRo-bm-eSc"/>
@@ -283,10 +284,11 @@
             </objects>
             <point key="canvasLocation" x="4295.419847328244" y="700"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Item-->
         <scene sceneID="QnX-cp-fue">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7aa-sg-Udy" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="1QN-YG-Mry"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="14z-Eo-6br">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -307,11 +309,13 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="pLs-ke-tmw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ReF-X9-6lD">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="sks-4l-86U" kind="relationship" relationship="viewControllers" id="kWQ-KJ-btP"/>
+                        <segue destination="7aa-sg-Udy" kind="relationship" relationship="viewControllers" id="wKa-7T-WfM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Tk-m0-ZO2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -339,6 +343,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
