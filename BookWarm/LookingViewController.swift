@@ -88,12 +88,13 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-//        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-        vc.transitionType = .present
+        vc.modalPresentationStyle = .fullScreen
         
         let row = list.movie[indexPath.row]
         vc.getData(row: row)
+        present(vc, animated: true)
+        vc.transitionType = .present
+        
     }
     
     

@@ -14,14 +14,15 @@ class LibraryListCollectionViewCell: UICollectionViewCell {
     @IBOutlet var posterImageView: UIImageView!
     @IBOutlet var likeButton: UIButton!
     
-    func configCell(row: Movie) {
+    func configCell(row: Book) {
         
         titleLabel.text = row.title
         titleLabel.textColor = .white
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
         
-        rateLabel.text = "\(row.rate)"
+        rateLabel.text = "\(row.author) | \(row.publisher)"
         rateLabel.textColor = .white
+        rateLabel.font = .systemFont(ofSize: 14)
         posterImageView.image = UIImage(named: row.title)
         
         layer.cornerRadius = 15
