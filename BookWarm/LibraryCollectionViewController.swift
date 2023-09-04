@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Kingfisher
+import RealmSwift
 
 class LibraryCollectionViewController: UICollectionViewController, UICollectionViewDataSourcePrefetching {
    
@@ -33,6 +34,7 @@ class LibraryCollectionViewController: UICollectionViewController, UICollectionV
         bookList = []
         
     }
+    
     func setLayout() {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 10
@@ -111,10 +113,19 @@ class LibraryCollectionViewController: UICollectionViewController, UICollectionV
                     }
                     
                     let newBook = Book(title: title, author: author, image: image, contents: contents, publisher: publisher)
+                    
+                    let realm = try! Realm()
+                    let books = BookTable(title: title, author: author, image: image, contents: contents, publisher: publisher)
+                    
+                    try! realm.write {
+                        realm.add(books)
+                        print("Realm Add Succeed")
+                    }
+                    
+                    
                     self.bookList.append(newBook)
                 }
                 self.collectionView.reloadData()
-                print(self.bookList)
             case .failure(let error):
                 print(error)
             }

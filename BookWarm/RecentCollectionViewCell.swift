@@ -12,8 +12,8 @@ class RecentCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var RecentPosterImageView: UIImageView!
     
-    func setRecentPosterImageView(item: Movie) {
-        RecentPosterImageView.image = UIImage(named: item.title)
-    }
+//    func setRecentPosterImageView(item: Movie) {
+//        RecentPosterImageView.image = UIImage(named: item.title)
+//    }
 }
 

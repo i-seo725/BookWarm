@@ -13,10 +13,10 @@ class PopularTableViewCell: UITableViewCell {
     @IBOutlet var popularMovieTitleLabel: UILabel!
     @IBOutlet var popularMovieSubTitleLabel: UILabel!
     
-    func configPopularMovieTableView(row: Movie) {
+    func configPopularMovieTableView(row: BookTable) {
         popularMovieTitleLabel.text = row.title
-        popularMovieSubTitleLabel.text = "\(row.releaseDate) | \(row.runtime)분 | \(row.rate)점"
-        popularMoviePosterImageView.image = UIImage(named: row.title)
+        popularMovieSubTitleLabel.text = "\(row.author) | \(row.publisher)"
+
     }
     override func awakeFromNib() {
         super.awakeFromNib()

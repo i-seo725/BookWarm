@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class LookingViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
       
@@ -13,8 +14,15 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet var recentCollectionView: UICollectionView!
     @IBOutlet var popularTableView: UITableView!
     
+    var books: Results<BookTable>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let realm = try! Realm()
+        books = realm.objects(BookTable.self)
+        
+        
         navigationItem.title = "둘러보기"
         collectionViewTitle.text = "최근 본 작품"
         
@@ -28,7 +36,13 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
         configCollectionViewLayout()
         
     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        recentCollectionView.reloadData()
+        popularTableView.reloadData()
+        
+    }
+    
     func configCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -43,29 +57,58 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.movie.count
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentCollectionViewCell", for: indexPath) as? RecentCollectionViewCell else { print("오류")
             return UICollectionViewCell() }
         
-        let item = list.movie[indexPath.item]
-        cell.setRecentPosterImageView(item: item)
+        let item = books.reversed()[indexPath.item]
+        guard let imageURL = item.image, let url = URL(string: imageURL) else { return cell }
+        DispatchQueue.global().async {
+            let data = try! Data(contentsOf: url)
+            
+            DispatchQueue.main.async {
+                cell.RecentPosterImageView.image = UIImage(data: data)
+            }
+        }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
+        vc.modalPresentationStyle = .fullScreen
+        
+        let row = list.movie[indexPath.row]
+        vc.getData(row: row)
+        present(vc, animated: true)
+        vc.transitionType = .present
+        
     }
     
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.movie.count
+        return books.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PopularTableViewCell") as! PopularTableViewCell
-        let row = list.movie[indexPath.row]
+        let row = books[indexPath.row]
         cell.configPopularMovieTableView(row: row)
+        
+        guard let imageURL = row.image, let url = URL(string: imageURL) else { return cell }
+        
+        DispatchQueue.global().async {
+            let data = try! Data(contentsOf: url)
+            print(data, "@@@@@")
+            
+            DispatchQueue.main.async {
+                cell.popularMoviePosterImageView.image = UIImage(data: data)
+            }
+        }
         
         return cell
     }
@@ -86,16 +129,7 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
         print(row.title)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        vc.modalPresentationStyle = .fullScreen
-        
-        let row = list.movie[indexPath.row]
-        vc.getData(row: row)
-        present(vc, animated: true)
-        vc.transitionType = .present
-        
-    }
+    
     
     
     
