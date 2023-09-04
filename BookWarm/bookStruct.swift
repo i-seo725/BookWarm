@@ -13,7 +13,7 @@ struct Book {
     let image: String
     let contents: String
     let publisher: String
-//    let price: Int
+    let price: String
 //    let date: String
     
     var like = false

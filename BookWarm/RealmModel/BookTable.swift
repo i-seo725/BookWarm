@@ -16,14 +16,16 @@ class BookTable: Object {
     @Persisted var image: String?
     @Persisted var contents: String?
     @Persisted var publisher: String
+    @Persisted var price: String
     
-    convenience init(title: String, author: String, image: String? = nil, contents: String? = nil, publisher: String) {
+    convenience init(title: String, author: String, image: String? = nil, contents: String? = nil, publisher: String, price: String) {
         self.init()
         self.title = title
         self.author = author
         self.image = image
         self.contents = contents
         self.publisher = publisher
+        self.price = price
     }
     
     

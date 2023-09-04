@@ -15,7 +15,7 @@ class PopularTableViewCell: UITableViewCell {
     
     func configPopularMovieTableView(row: BookTable) {
         popularMovieTitleLabel.text = row.title
-        popularMovieSubTitleLabel.text = "\(row.author) | \(row.publisher)"
+        popularMovieSubTitleLabel.text = "\(row.author) | \(row.publisher) | \(row.price)원"
 
     }
     override func awakeFromNib() {

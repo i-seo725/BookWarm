@@ -30,7 +30,7 @@
 		F467DFD02A77E84D009D7266 /* LibraryListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F467DFCE2A77E84D009D7266 /* LibraryListCollectionViewCell.xib */; };
 		F4DF216B2AA61A2D009D1250 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F4DF216A2AA61A2D009D1250 /* Realm */; };
 		F4DF216D2AA61A2D009D1250 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F4DF216C2AA61A2D009D1250 /* RealmSwift */; };
-		F4DF21702AA61A4E009D1250 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF216F2AA61A4E009D1250 /* Book.swift */; };
+		F4DF21702AA61A4E009D1250 /* BookTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF216F2AA61A4E009D1250 /* BookTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +54,7 @@
 		F467DFC72A77E759009D7266 /* MovieStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStruct.swift; sourceTree = "<group>"; };
 		F467DFCD2A77E84D009D7266 /* LibraryListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryListCollectionViewCell.swift; sourceTree = "<group>"; };
 		F467DFCE2A77E84D009D7266 /* LibraryListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LibraryListCollectionViewCell.xib; sourceTree = "<group>"; };
-		F4DF216F2AA61A4E009D1250 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		F4DF216F2AA61A4E009D1250 /* BookTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,7 @@
 		F4DF216E2AA61A3F009D1250 /* RealmModel */ = {
 			isa = PBXGroup;
 			children = (
-				F4DF216F2AA61A4E009D1250 /* Book.swift */,
+				F4DF216F2AA61A4E009D1250 /* BookTable.swift */,
 			);
 			path = RealmModel;
 			sourceTree = "<group>";
@@ -220,7 +220,7 @@
 			files = (
 				F41A4B242A83B26E00CDD95E /* bookStruct.swift in Sources */,
 				F467DFC62A77E688009D7266 /* MovieInfo.swift in Sources */,
-				F4DF21702AA61A4E009D1250 /* Book.swift in Sources */,
+				F4DF21702AA61A4E009D1250 /* BookTable.swift in Sources */,
 				F467DFC82A77E759009D7266 /* MovieStruct.swift in Sources */,
 				F423137A2A7AA86D0002F967 /* PopularTableViewCell.swift in Sources */,
 				F467DFC02A77E4C3009D7266 /* LibraryCollectionViewController.swift in Sources */,

@@ -16,6 +16,7 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     
     var books: Results<BookTable>!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +41,6 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
         super.viewWillAppear(animated)
         recentCollectionView.reloadData()
         popularTableView.reloadData()
-        
     }
     
     func configCollectionViewLayout() {
@@ -57,7 +57,7 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -79,13 +79,8 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
-        vc.modalPresentationStyle = .fullScreen
-        
-        let row = list.movie[indexPath.row]
-        vc.getData(row: row)
-        present(vc, animated: true)
-        vc.transitionType = .present
-        
+        vc.selectedBook = books[indexPath.item]
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -117,16 +112,9 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
 //        vc.modalPresentationStyle = .fullScreen
+        vc.selectedBook = books[indexPath.row]
         present(vc, animated: true)
         vc.transitionType = .present
-        
-        let row = list.movie[indexPath.row]
-        vc.getTitle = row.title
-        vc.getPosterImage = row.title
-        vc.getLikeImage = row.like
-        vc.getTitleScore = "\(row.title) | 평점 \(row.rate) | \(row.runtime)분"
-        vc.getContent = row.overview
-        print(row.title)
     }
     
     

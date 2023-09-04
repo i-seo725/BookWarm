@@ -102,6 +102,7 @@ class LibraryCollectionViewController: UICollectionViewController, UICollectionV
                     let image = i["thumbnail"].stringValue
                     let contents = i["contents"].stringValue
                     let publisher = i["publisher"].stringValue
+                    let price = i["price"].stringValue
                     let authors = i["authors"].arrayValue
                     var author = ""
                     if authors.count == 1 {
@@ -112,10 +113,10 @@ class LibraryCollectionViewController: UICollectionViewController, UICollectionV
                         }
                     }
                     
-                    let newBook = Book(title: title, author: author, image: image, contents: contents, publisher: publisher)
+                    let newBook = Book(title: title, author: author, image: image, contents: contents, publisher: publisher, price: price)
                     
                     let realm = try! Realm()
-                    let books = BookTable(title: title, author: author, image: image, contents: contents, publisher: publisher)
+                    let books = BookTable(title: title, author: author, image: image, contents: contents, publisher: publisher, price: price)
                     
                     try! realm.write {
                         realm.add(books)
