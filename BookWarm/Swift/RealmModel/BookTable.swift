@@ -17,6 +17,7 @@ class BookTable: Object {
     @Persisted var contents: String?
     @Persisted var publisher: String
     @Persisted var price: String
+    @Persisted var memo: String?
     
     convenience init(title: String, author: String, image: String? = nil, contents: String? = nil, publisher: String, price: String) {
         self.init()

@@ -13,11 +13,13 @@ import RealmSwift
 
 class LibraryCollectionViewController: UICollectionViewController, UICollectionViewDataSourcePrefetching {
    
+    var tasks: Results<BookTable>!
+    let realm = try! Realm()
     let searchBar = UISearchBar()
     var bookList: [Book] = []
     var page = 1
     var isEnd = false
-    
+    var id: [ObjectId] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "LibraryListCollectionViewCell", bundle: nil)
@@ -33,6 +35,9 @@ class LibraryCollectionViewController: UICollectionViewController, UICollectionV
         navigationItem.titleView = searchBar
         bookList = []
         
+        let realm = try! Realm()
+        tasks = realm.objects(BookTable.self)
+        print(realm.configuration.fileURL)
     }
     
     func setLayout() {
@@ -54,14 +59,22 @@ class LibraryCollectionViewController: UICollectionViewController, UICollectionV
         return bookList.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LibraryListCollectionViewCell", for: indexPath) as? LibraryListCollectionViewCell else { return UICollectionViewCell() }
         
         let row = bookList[indexPath.row]
         cell.configCell(row: row)
-        
-        if let imageURL = URL(string: bookList[indexPath.row].image) {
-            cell.posterImageView.kf.setImage(with: imageURL)
+ 
+        if let url = URL(string: bookList[indexPath.row].image) {
+            let task = tasks[indexPath.row]
+            DispatchQueue.global().async {
+                let data = try! Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    cell.posterImageView.image = UIImage(data: data)
+                    if let image = cell.posterImageView.image {
+                        self.saveImageToDocument(fileName: "\(task._id).jpg", image: image)
+                    }
+                }
+            }
         }
         
         //좋아요 버튼 누르기
@@ -114,14 +127,14 @@ class LibraryCollectionViewController: UICollectionViewController, UICollectionV
                     }
                     
                     let newBook = Book(title: title, author: author, image: image, contents: contents, publisher: publisher, price: price)
-                    
-                    let realm = try! Realm()
                     let books = BookTable(title: title, author: author, image: image, contents: contents, publisher: publisher, price: price)
                     
-                    try! realm.write {
-                        realm.add(books)
+                    try! self.realm.write {
+                        self.realm.add(books)
                         print("Realm Add Succeed")
                     }
+                    self.id.append(books._id)
+                    print(self.id)
                     
                     
                     self.bookList.append(newBook)
@@ -148,6 +161,14 @@ extension LibraryCollectionViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         bookList.removeAll()
+        
+        for i in id {
+            removeImageFromDocument(fileName: "\(i).jpg")
+            print("삭제")
+        }
+        try! realm.write {
+            realm.deleteAll()
+        }
         page = 1
         callRequest(query: searchBar.text!, page: page)
         searchBar.resignFirstResponder()

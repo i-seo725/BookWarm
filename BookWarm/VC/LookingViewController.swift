@@ -15,12 +15,10 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet var popularTableView: UITableView!
     
     var books: Results<BookTable>!
-    
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let realm = try! Realm()
         books = realm.objects(BookTable.self)
         
         
@@ -57,22 +55,19 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return books.count
+        if books.count > 15 {
+            return 15
+        } else {
+            return books.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecentCollectionViewCell", for: indexPath) as? RecentCollectionViewCell else { print("오류")
             return UICollectionViewCell() }
         
-        let item = books.reversed()[indexPath.item]
-        guard let imageURL = item.image, let url = URL(string: imageURL) else { return cell }
-        DispatchQueue.global().async {
-            let data = try! Data(contentsOf: url)
-            
-            DispatchQueue.main.async {
-                cell.RecentPosterImageView.image = UIImage(data: data)
-            }
-        }
+        let item = books[indexPath.item]
+        cell.RecentPosterImageView.image = loadImageFromDocument(fileName: "\(item._id).jpg")
         
         return cell
     }
@@ -86,28 +81,21 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return books.count
+        if books.count > 15 {
+            return 15
+        } else {
+            return books.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PopularTableViewCell") as! PopularTableViewCell
         let row = books[indexPath.row]
         cell.configPopularMovieTableView(row: row)
-        
-        guard let imageURL = row.image, let url = URL(string: imageURL) else { return cell }
-        
-        DispatchQueue.global().async {
-            let data = try! Data(contentsOf: url)
-            print(data, "@@@@@")
-            
-            DispatchQueue.main.async {
-                cell.popularMoviePosterImageView.image = UIImage(data: data)
-            }
-        }
+        cell.popularMoviePosterImageView.image = loadImageFromDocument(fileName: "\(row._id).jpg")
         
         return cell
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
