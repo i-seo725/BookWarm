@@ -101,8 +101,7 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
 //        vc.modalPresentationStyle = .fullScreen
         vc.selectedBook = books[indexPath.row]
-        present(vc, animated: true)
-        vc.transitionType = .present
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

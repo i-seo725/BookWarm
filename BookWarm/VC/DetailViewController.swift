@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 enum transition {
     case push
@@ -24,9 +25,10 @@ class DetailViewController: UIViewController {
     
     var transitionType: transition = .push
     var selectedBook: BookTable?
-    
     var editTextView: String = ""
     let placeholderText = "내용을 입력해주세요"
+    let realm = try! Realm()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,11 @@ class DetailViewController: UIViewController {
         memoTextView.text = placeholderText
         memoTextView.textColor = .lightGray
         setView()
+        let doneButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(doneButtonClicked))
+        let deleteButton = UIBarButtonItem(title: "삭제", style: .plain, target: self, action: #selector(deleteButtonClicked))
+        navigationItem.rightBarButtonItems = [doneButton, deleteButton]
+        
+        
         //        setTransition()
         // 이건 모달 방식일 때 하는 설정인듯!
 //        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "lessthan"), style: .plain, target: self, action: #selector(backButtonTapped))
@@ -43,6 +50,30 @@ class DetailViewController: UIViewController {
         
     }
     
+    @objc func doneButtonClicked() {
+        guard let selectedBook else { return }
+        try! realm.write {
+            selectedBook.memo = memoTextView.text
+        }
+        view.endEditing(true)
+    }
+    @objc func deleteButtonClicked() {
+        guard let selectedBook else { return }
+        removeImageFromDocument(fileName: "\(selectedBook._id).jpg")
+        
+        do {
+            try realm.write {
+                delete(selectedBook)
+            }
+        } catch {
+            print(error)
+        }
+        
+        
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
     func setView() {
         guard let selectedBook else { return }
         title = selectedBook.title
@@ -50,20 +81,14 @@ class DetailViewController: UIViewController {
         contentLabel.numberOfLines = 12
         contentLabel.font = UIFont.systemFont(ofSize: 14)
         backView.backgroundColor = .systemGray5
+        posterImageView.image = loadImageFromDocument(fileName: "\(selectedBook._id).jpg")
         
-        guard let contents = selectedBook.contents, let imageURL = selectedBook.image, let url = URL(string: imageURL) else { return }
-        contentLabel.text = contents
-        DispatchQueue.global().async {
-            let data = try! Data(contentsOf: url)
-            
-            DispatchQueue.main.async {
-                self.posterImageView.image = UIImage(data: data)
-            }
+        if let memo = selectedBook.memo {
+            memoTextView.text = memo
         }
-    }
-    
-    @objc func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
+        
+        guard let contents = selectedBook.contents else { return }
+        contentLabel.text = contents
     }
 }
 
