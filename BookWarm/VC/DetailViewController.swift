@@ -27,7 +27,7 @@ class DetailViewController: UIViewController {
     var selectedBook: BookTable?
     var editTextView: String = ""
     let placeholderText = "내용을 입력해주세요"
-    let realm = try! Realm()
+    let repo = Repository()
     
     
     override func viewDidLoad() {
@@ -52,26 +52,16 @@ class DetailViewController: UIViewController {
     
     @objc func doneButtonClicked() {
         guard let selectedBook else { return }
-        try! realm.write {
-            selectedBook.memo = memoTextView.text
-        }
+        repo.update(id: selectedBook._id, memo: memoTextView.text)
         view.endEditing(true)
     }
     @objc func deleteButtonClicked() {
         guard let selectedBook else { return }
-        removeImageFromDocument(fileName: "\(selectedBook._id).jpg")
-        
-        do {
-            try realm.write {
-                delete(selectedBook)
-            }
-        } catch {
-            print(error)
-        }
-        
-        
         
         navigationController?.popViewController(animated: true)
+        removeImageFromDocument(fileName: "\(selectedBook._id).jpg")
+        repo.delete(data: selectedBook)
+        
     }
     
     func setView() {

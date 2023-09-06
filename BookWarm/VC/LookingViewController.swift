@@ -14,12 +14,13 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet var recentCollectionView: UICollectionView!
     @IBOutlet var popularTableView: UITableView!
     
+    let repo = Repository()
     var books: Results<BookTable>!
-    let realm = try! Realm()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        books = realm.objects(BookTable.self)
+        books = repo.fetch()
         
         
         navigationItem.title = "둘러보기"

@@ -13,8 +13,8 @@ import RealmSwift
 
 class LibraryCollectionViewController: UICollectionViewController, UICollectionViewDataSourcePrefetching {
    
+    let repo = Repository()
     var tasks: Results<BookTable>!
-    let realm = try! Realm()
     let searchBar = UISearchBar()
     var bookList: [Book] = []
     var page = 1
@@ -35,9 +35,8 @@ class LibraryCollectionViewController: UICollectionViewController, UICollectionV
         navigationItem.titleView = searchBar
         bookList = []
         
-        let realm = try! Realm()
-        tasks = realm.objects(BookTable.self)
-        print(realm.configuration.fileURL)
+        tasks = repo.fetch()
+        repo.getFileURL()
     }
     
     func setLayout() {
@@ -129,10 +128,8 @@ class LibraryCollectionViewController: UICollectionViewController, UICollectionV
                     let newBook = Book(title: title, author: author, image: image, contents: contents, publisher: publisher, price: price)
                     let books = BookTable(title: title, author: author, image: image, contents: contents, publisher: publisher, price: price)
                     
-                    try! self.realm.write {
-                        self.realm.add(books)
-                        print("Realm Add Succeed")
-                    }
+                    self.repo.create(data: books)
+                    
                     self.id.append(books._id)
                     print(self.id)
                     
@@ -166,9 +163,7 @@ extension LibraryCollectionViewController: UISearchBarDelegate {
             removeImageFromDocument(fileName: "\(i).jpg")
             print("삭제")
         }
-        try! realm.write {
-            realm.deleteAll()
-        }
+        repo.deleteAll()
         page = 1
         callRequest(query: searchBar.text!, page: page)
         searchBar.resignFirstResponder()
