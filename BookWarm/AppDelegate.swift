@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let config = Realm.Configuration(schemaVersion: 4) { migration, oldSchemaVersoin in
+            if oldSchemaVersoin < 1 { } // love column 추가
+            if oldSchemaVersoin < 2 {   // status column 추가 및 기본값 지정
+                migration.enumerateObjects(ofType: BookTable.className()) { oldObject, newObject in
+                    guard let newObject else { return }
+                    newObject["status"] = "정상판매"
+                }
+            }
+            if oldSchemaVersoin < 3 { }
+            if oldSchemaVersoin < 4 { }
+
+        }
+        
+        Realm.Configuration.defaultConfiguration = config
+        
+//            migration.renameProperty(onType: Diary.className(), from: "photo", to: "photos")
+//                migration.enumerateObjects(ofType: Diary.className()) { oldObject, newObject in
+//                    guard let newObject else { return }
+//                    guard let oldObject else { return }
+//                    newObject["summary"] = "제목은 '\(oldObject["title"])'이고, 내용은 '\(oldObject["contentsBox"])'입니다"   //새 컬럼이 생길 때 기본값 넣기
+//                }
+        
         return true
     }
 

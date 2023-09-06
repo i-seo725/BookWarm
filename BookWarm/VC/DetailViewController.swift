@@ -40,14 +40,6 @@ class DetailViewController: UIViewController {
         let deleteButton = UIBarButtonItem(title: "삭제", style: .plain, target: self, action: #selector(deleteButtonClicked))
         navigationItem.rightBarButtonItems = [doneButton, deleteButton]
         
-        
-        //        setTransition()
-        // 이건 모달 방식일 때 하는 설정인듯!
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "lessthan"), style: .plain, target: self, action: #selector(backButtonTapped))
-        //        navigationItem.
-        //        navigationItem.leftBarButtonItem?.tintColor = .black
-        
-        
     }
     
     @objc func doneButtonClicked() {

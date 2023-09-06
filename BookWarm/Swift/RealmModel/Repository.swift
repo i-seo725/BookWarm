@@ -19,6 +19,15 @@ protocol RepositoryProtocol: AnyObject {
 final class Repository: RepositoryProtocol {
     private let realm = try! Realm()
     
+    func checkSchemaVersion() {
+        do {
+            let version = try schemaVersionAtURL(realm.configuration.fileURL!)
+            print("Schema Verson: ", version)
+        } catch {
+            print("Load Version Failed: ", error)
+        }
+    }
+    
     func fetch()  -> Results<BookTable> {
         return realm.objects(BookTable.self)
     }

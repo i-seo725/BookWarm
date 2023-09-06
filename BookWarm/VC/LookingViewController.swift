@@ -34,6 +34,8 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
         popularTableView.rowHeight = 130
         
         configCollectionViewLayout()
+        repo.checkSchemaVersion()
+        print(books)
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -56,11 +58,7 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if books.count > 15 {
-            return 15
-        } else {
-            return books.count
-        }
+        return books.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -82,11 +80,7 @@ class LookingViewController: UIViewController, UICollectionViewDataSource, UICol
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if books.count > 15 {
-            return 15
-        } else {
-            return books.count
-        }
+        return books.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
